@@ -168,7 +168,7 @@ module Cassandra
     end
     let(:retry_policy)              { Retry::Policies::Default.new }
     let(:address_resolution_policy) { AddressResolution::Policies::None.new }
-    let(:consistency)               { :local_one }
+    let(:consistency)               { :quorum }
     let(:trace)                     { false }
     let(:page_size)                 { 10000 }
     let(:heartbeat_interval)        { 30 }

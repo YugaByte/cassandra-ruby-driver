@@ -262,13 +262,13 @@ module Cassandra
         def send_select_request(connection, cql, params = EMPTY_LIST, types = EMPTY_LIST)
           backtrace = caller
           connection.send_request(
-            Protocol::QueryRequest.new(cql, params, types, :one)
+            Protocol::QueryRequest.new(cql, params, types, :quorum)
           ).map do |r|
             case r
             when Protocol::RowsResultResponse
               r.rows
             when Protocol::ErrorResponse
-              e = r.to_error(nil, VOID_STATEMENT, VOID_OPTIONS, EMPTY_LIST, :one, 0)
+              e = r.to_error(nil, VOID_STATEMENT, VOID_OPTIONS, EMPTY_LIST, :quorum, 0)
               e.set_backtrace(backtrace)
               raise e
             else

@@ -222,7 +222,7 @@ module Cassandra
             ::Ione::Future.resolved(connection)
           when Protocol::ErrorResponse
             ::Ione::Future.failed(
-              r.to_error(nil, VOID_STATEMENT, VOID_OPTIONS, EMPTY_LIST, :one, 0)
+              r.to_error(nil, VOID_STATEMENT, VOID_OPTIONS, EMPTY_LIST, :quorum, 0)
             )
           else
             ::Ione::Future.failed(
@@ -242,7 +242,7 @@ module Cassandra
           VOID_STATEMENT,
           VOID_OPTIONS,
           EMPTY_LIST,
-          :one,
+          :quorum,
           0
         )
       end
@@ -254,7 +254,7 @@ module Cassandra
           when Protocol::SupportedResponse
             r.options
           when Protocol::ErrorResponse
-            raise r.to_error(nil, VOID_STATEMENT, VOID_OPTIONS, EMPTY_LIST, :one, 0)
+            raise r.to_error(nil, VOID_STATEMENT, VOID_OPTIONS, EMPTY_LIST, :quorum, 0)
           else
             raise Errors::InternalError, "Unexpected response #{r.inspect}"
           end
@@ -268,7 +268,7 @@ module Cassandra
           when Protocol::ReadyResponse
             connection
           when Protocol::ErrorResponse
-            raise r.to_error(nil, VOID_STATEMENT, VOID_OPTIONS, EMPTY_LIST, :one, 0)
+            raise r.to_error(nil, VOID_STATEMENT, VOID_OPTIONS, EMPTY_LIST, :quorum, 0)
           else
             raise Errors::InternalError, "Unexpected response #{r.inspect}"
           end
@@ -291,7 +291,7 @@ module Cassandra
             ::Ione::Future.resolved(connection)
           when Protocol::ErrorResponse
             ::Ione::Future.failed(
-              r.to_error(nil, VOID_STATEMENT, VOID_OPTIONS, EMPTY_LIST, :one, 0)
+              r.to_error(nil, VOID_STATEMENT, VOID_OPTIONS, EMPTY_LIST, :quorum, 0)
             )
           else
             ::Ione::Future.failed(

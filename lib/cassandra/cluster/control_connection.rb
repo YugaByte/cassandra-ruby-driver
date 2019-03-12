@@ -154,14 +154,14 @@ module Cassandra
           'FROM system.local',
         EMPTY_LIST,
         EMPTY_LIST,
-        :one
+        :quorum
       )
       SELECT_PEERS = Protocol::QueryRequest.new(
         'SELECT * ' \
           'FROM system.peers',
         EMPTY_LIST,
         EMPTY_LIST,
-        :one
+        :quorum
       )
 
       SELECT_PEER_QUERY =
@@ -211,7 +211,7 @@ module Cassandra
           when Protocol::ReadyResponse
             nil
           when Protocol::ErrorResponse
-            raise r.to_error(nil, VOID_STATEMENT, VOID_OPTIONS, EMPTY_LIST, :one, 0)
+            raise r.to_error(nil, VOID_STATEMENT, VOID_OPTIONS, EMPTY_LIST, :quorum, 0)
           else
             raise Errors::InternalError, "Unexpected response #{r.inspect}"
           end
@@ -582,7 +582,7 @@ module Cassandra
                     Protocol::QueryRequest.new(SELECT_PEER_QUERY % ip,
                                                EMPTY_LIST,
                                                EMPTY_LIST,
-                                               :one)
+                                               :quorum)
                   end
 
         send_select_request(connection, request).map do |rows|
@@ -949,7 +949,7 @@ Control connection failed and is unlikely to recover.
           when Protocol::RowsResultResponse
             r.rows
           when Protocol::ErrorResponse
-            e = r.to_error(nil, VOID_STATEMENT, VOID_OPTIONS, EMPTY_LIST, :one, 0)
+            e = r.to_error(nil, VOID_STATEMENT, VOID_OPTIONS, EMPTY_LIST, :quorum, 0)
             e.set_backtrace(backtrace)
             raise e
           else

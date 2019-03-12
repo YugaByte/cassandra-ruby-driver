@@ -246,7 +246,7 @@ module Cassandra
   #   initial listeners. A list of initial cluster state listeners. Note that a
   #   `:load_balancing` policy is automatically registered with the cluster.
   #
-  # @option options [Symbol] :consistency (:local_one) default consistency
+  # @option options [Symbol] :consistency (:local_quorum) default consistency
   #   to use for all requests. Must be one of {Cassandra::CONSISTENCIES}.
   #
   # @option options [Boolean] :trace (false) whether or not to trace all
@@ -834,7 +834,7 @@ module Cassandra
   # @private
   VOID_STATEMENT = Statements::Void.new
   # @private
-  VOID_OPTIONS   = Execution::Options.new(consistency: :one,
+  VOID_OPTIONS   = Execution::Options.new(consistency: :quorum,
                                           load_balancing_policy: LoadBalancing::Policies::RoundRobin.new,
                                           retry_policy: Retry::Policies::Default.new)
   # @private

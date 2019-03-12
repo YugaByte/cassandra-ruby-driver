@@ -14,7 +14,7 @@ Feature: Execution profiles
 
   * load_balancing_policy: `LoadBalancing::Policies::TokenAware.new(LoadBalancing::Policies::DCAwareRoundRobin.new, true)`
   * retry-policy: `Retry::Policies::Default.new`
-  * consistency: `:local_one`
+  * consistency: `:quorum`
   * timeout: `12`
 
   In particular, note that user-defined execution profiles do not fall back to options specified in a (possibly
