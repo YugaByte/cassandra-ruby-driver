@@ -37,7 +37,7 @@ __Note__: Big-endian systems are not supported.
 ## Quick start
 
 ```ruby
-require 'cassandra'
+require 'ycql'
 
 cluster = Cassandra.cluster # connects to localhost by default
 
