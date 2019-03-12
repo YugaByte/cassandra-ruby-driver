@@ -5,19 +5,19 @@ $LOAD_PATH << File.expand_path('../lib', __FILE__)
 require 'cassandra/version'
 
 Gem::Specification.new do |s|
-  s.name          = 'cassandra-driver'
+  s.name          = 'yugabyte-ycql-driver'
   s.version       = Cassandra::VERSION.dup
-  s.authors       = ['Theo Hultberg', 'Bulat Shakirzyanov', 'Sandeep Tamhankar']
-  s.email         = ['theo@iconara.net', 'bulat.shakirzyanov@datastax.com', 'sandeep.tamhankar@datastax.com']
-  s.homepage      = 'http://datastax.github.io/ruby-driver'
-  s.summary       = 'Datastax Ruby Driver for Apache Cassandra'
-  s.description   = 'A pure Ruby driver for Apache Cassandra'
+  s.authors       = ['Theo Hultberg', 'Bulat Shakirzyanov', 'Sandeep Tamhankar', 'YugaByte Development Team']
+  s.email         = ['theo@iconara.net', 'bulat.shakirzyanov@datastax.com', 'sandeep.tamhankar@datastax.com', 'info@yugabyte.com']
+  s.homepage      = 'https://github.com/YugaByte/cassandra-ruby-driver'
+  s.summary       = 'Ruby Driver for YugaByte DB'
+  s.description   = 'YugaByte Ruby Driver for YugaByte DB\'s Cassandra compatible YCQL API; derived from Datastax Ruby Driver for Apache Cassandra'
   s.license       = 'Apache License 2.0'
   s.files         = Dir['lib/**/*.rb', 'README.md', '.yardopts']
   s.require_paths = %w[lib]
 
   s.extra_rdoc_files = ['README.md']
-  s.rdoc_options << '--title' << 'Datastax Ruby Driver' << '--main' << 'README.md' << '--line-numbers'
+  s.rdoc_options << '--title' << 'Ruby Driver for YugaByte DB' << '--main' << 'README.md' << '--line-numbers'
 
   s.required_ruby_version = '>= 2.2.0'
 

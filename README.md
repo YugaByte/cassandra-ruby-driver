@@ -1,4 +1,4 @@
-# Datastax Ruby Driver for Apache Cassandra
+# YugaByte Ruby Driver for YugaByte DB's Cassandra compatible YCQL API
 
 *If you're reading this on GitHub, please note that this is the readme for the development version and that some
 features described here might not yet have been released. You can view the documentation for the latest released
@@ -6,18 +6,12 @@ version [here](http://docs.datastax.com/en/developer/ruby-driver/latest).*
 
 [![Build Status](https://travis-ci.org/datastax/ruby-driver.svg?branch=master)](https://travis-ci.org/datastax/ruby-driver)
 
-A Ruby client driver for Apache Cassandra. This driver works exclusively with
+A Ruby client driver for YugaByte DB's Cassandra compatible YCQL API. This driver works exclusively with
 the Cassandra Query Language version 3 (CQL3) and Cassandra's native protocol.
 
-Use the [Ruby DSE driver](https://github.com/datastax/ruby-dse-driver.git) for
-better compatibility and support for DataStax Enterprise.
-
-- Code: https://github.com/datastax/ruby-driver
+- Code: https://github.com/yugabyte/cassandra-ruby-driver
 - Docs: http://docs.datastax.com/en/developer/ruby-driver
-- Jira: https://datastax-oss.atlassian.net/browse/RUBY
 - Mailing List: https://groups.google.com/a/lists.datastax.com/forum/#!forum/ruby-driver-user
-- Slack: `#datastax-drivers` channel at https://academy.datastax.com/slack
-- Twitter: Follow the latest news about DataStax Drivers - [@stamhankar999](http://twitter.com/stamhankar999), [@avalanche123](http://twitter.com/avalanche123), [@al3xandru](https://twitter.com/al3xandru)
 
 This driver is based on [the cql-rb gem](https://github.com/iconara/cql-rb) by [Theo Hultberg](https://github.com/iconara) and we added support for:
 
@@ -34,20 +28,11 @@ This driver is based on [the cql-rb gem](https://github.com/iconara/cql-rb) by [
 
 ## Compatibility
 
-This driver works exclusively with the Cassandra Query Language v3 (CQL3) and Cassandra's native protocol. The current version works with:
-
-* Apache Cassandra versions 2.1, 2.2, and 3.x
-* DataStax Enterprise 4.8 and above. However, the [Ruby DSE driver](https://github.com/datastax/ruby-dse-driver.git) provides more features and is recommended for use with DataStax Enterprise.
-* Ruby (MRI) 2.2, 2.3, 2.4
-* JRuby 9k
+This driver works exclusively with the Cassandra Query Language v3 (CQL3) and Cassandra's native protocol.
 
 __Note__: Rubinius is not supported. 
 
 __Note__: Big-endian systems are not supported.
-
-## Feedback Requested
-
-*Help us focus our efforts!* [Provide your input](http://goo.gl/forms/pCs8PTpHLf) on the Ruby Driver Platform and Runtime Survey (we kept it short).
 
 ## Quick start
 
@@ -103,9 +88,6 @@ Some of the new features added to the driver have unfortunately led to changes i
 In the examples directory, you can find [an example of how to wrap the ruby driver to achieve almost complete
 interface parity with cql-rb](https://github.com/datastax/ruby-driver/blob/v3.2.3/examples/cql-rb-wrapper.rb)
 to assist you with gradual upgrade.
-
-If you are upgrading to DataStax Enterprise, use the [Ruby DSE driver](https://github.com/datastax/ruby-dse-driver.git) 
-for more features and better compatibility.
 
 ## What's new in v3.2
 This minor release adds support for MRI 2.4.x and also contains a few miscellaneous defect fixes. It also removes
@@ -185,7 +167,7 @@ ruby-driver tests, feel free to [check out .travis.yml for the entire build code
 * Check out the driver codebase and install test dependencies:
 
 ```bash
-git clone https://github.com/datastax/ruby-driver.git
+git clone https://github.com/yugabyte/cassandra-ruby-driver.git
 cd ruby-driver
 bundle install --without docs
 ```
@@ -203,8 +185,8 @@ CASSANDRA_VERSION=2.1.12 bundle exec rake test # run both as well as integration
 
 ## Changelog & versioning
 
-Check out the [releases on GitHub](https://github.com/datastax/ruby-driver/releases) and
-[changelog](https://github.com/datastax/ruby-driver/blob/v3.2.3/CHANGELOG.md). Version
+Check out the [releases on GitHub](https://github.com/yugabyte/cassandra-ruby-driver/releases) and
+[changelog](https://github.com/yugabyte/cassandra-ruby-driver/blob/v3.2.3/CHANGELOG.md). Version
 numbering follows the [semantic versioning](http://semver.org/) scheme.
 
 Private and experimental APIs, defined as whatever is not in the
@@ -231,7 +213,7 @@ Please [refer to the usage documentation for more information on common pitfalls
 
 ## Contributing
 
-For contributing read [CONTRIBUTING.md](https://github.com/datastax/ruby-driver/blob/master/CONTRIBUTING.md)
+For contributing read [CONTRIBUTING.md](https://github.com/yugabyte/cassandra-ruby-driver/blob/master/CONTRIBUTING.md)
 
 ## Credits
 
