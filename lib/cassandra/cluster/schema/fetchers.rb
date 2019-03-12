@@ -1324,14 +1324,14 @@ module Cassandra
           end
 
           def create_compaction_strategy(table_data)
-            options = table_data['compaction']
-            klass   = options.delete('class')
+            options = table_data['compaction'] || {}
+            klass   = options.delete('class') || ''
             klass.slice!('org.apache.cassandra.db.compaction.')
             ColumnContainer::Compaction.new(klass, options)
           end
 
           def create_table_options(table_data, compaction_strategy, is_compact)
-            compression = table_data['compression']
+            compression = table_data['compression'] || {}
             compression['class'].slice!(COMPRESSION_PACKAGE_PREFIX) if compression['class']
 
             Cassandra::ColumnContainer::Options.new(
