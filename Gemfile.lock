@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    yugabyte-ycql-driver (3.2.3.yb.1)
+    yugabyte-ycql-driver (3.2.3.1)
       ione (~> 1.2)
 
 GEM
