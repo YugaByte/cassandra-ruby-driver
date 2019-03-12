@@ -375,14 +375,14 @@ module Cassandra
           'SELECT peer, rpc_address, schema_version FROM system.peers',
           EMPTY_LIST,
           EMPTY_LIST,
-          :one
+          :quorum
         )
       SELECT_SCHEMA_LOCAL =
         Protocol::QueryRequest.new(
           "SELECT schema_version FROM system.local WHERE key='local'",
           EMPTY_LIST,
           EMPTY_LIST,
-          :one
+          :quorum
         )
 
       def connected(f)
@@ -1533,7 +1533,7 @@ module Cassandra
         request = Protocol::QueryRequest.new("USE #{Util.escape_name(keyspace)}",
                                              EMPTY_LIST,
                                              EMPTY_LIST,
-                                             :one)
+                                             :quorum)
 
         f = connection.send_request(request, timeout).map do |r|
           case r
@@ -1545,7 +1545,7 @@ module Cassandra
                              Statements::Simple.new("USE #{Util.escape_name(keyspace)}"),
                              VOID_OPTIONS,
                              EMPTY_LIST,
-                             :one,
+                             :quorum,
                              0)
           else
             raise Errors::InternalError, "Unexpected response #{r.inspect}"
@@ -1582,7 +1582,7 @@ module Cassandra
             end
             id
           when Protocol::ErrorResponse
-            raise r.to_error(nil, VOID_STATEMENT, VOID_OPTIONS, EMPTY_LIST, :one, 0)
+            raise r.to_error(nil, VOID_STATEMENT, VOID_OPTIONS, EMPTY_LIST, :quorum, 0)
           else
             raise Errors::InternalError, "Unexpected response #{r.inspect}"
           end
@@ -1601,7 +1601,7 @@ module Cassandra
           when Protocol::RowsResultResponse
             r.rows
           when Protocol::ErrorResponse
-            raise r.to_error(nil, VOID_STATEMENT, VOID_OPTIONS, EMPTY_LIST, :one, 0)
+            raise r.to_error(nil, VOID_STATEMENT, VOID_OPTIONS, EMPTY_LIST, :quorum, 0)
           else
             raise Errors::InternalError, "Unexpected response #{r.inspect}"
           end

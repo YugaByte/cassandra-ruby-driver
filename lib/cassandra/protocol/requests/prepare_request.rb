@@ -26,7 +26,7 @@ module Cassandra
         raise ArgumentError, 'No CQL given!' unless cql
         super(9, trace)
         @cql = cql
-        @consistency = :one
+        @consistency = :quorum
         @payload = payload
       end
 

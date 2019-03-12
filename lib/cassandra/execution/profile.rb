@@ -43,7 +43,7 @@ module Cassandra
       attr_reader :timeout
 
       # @private
-      DEFAULT_OPTIONS = { consistency: :local_one, timeout: 12 }.freeze
+      DEFAULT_OPTIONS = { consistency: :quorum, timeout: 12 }.freeze
 
       # @param options [Hash] hash of attributes. Unspecified attributes fall back to system defaults.
       # @option options [Numeric] :timeout (12) Request execution timeout in
@@ -53,7 +53,7 @@ module Cassandra
       #   that determines which node will run the next statement.
       # @option options [Cassandra::Retry::Policy] :retry_policy (Retry::Policies::Default) Retry policy that
       #   determines how request retries should be handled for different failure modes.
-      # @option options [Symbol] :consistency (:local_one) Consistency level with which to run statements. Must be one
+      # @option options [Symbol] :consistency (:quorum) Consistency level with which to run statements. Must be one
       #   of {Cassandra::CONSISTENCIES}.
       def initialize(options = {})
         validate(options)
