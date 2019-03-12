@@ -70,13 +70,13 @@ Read more:
 Install via rubygems
 
 ```bash
-gem install cassandra-driver
+gem install yugabyte-ycql-driver
 ```
 
 Install via Gemfile
 
 ```ruby
-gem 'cassandra-driver'
+gem 'yugabyte-ycql-driver'
 ```
 
 __Note__: if you want to use compression you should also install [snappy](http://rubygems.org/gems/snappy) or [lz4-ruby](http://rubygems.org/gems/lz4-ruby). [Read more about compression.](http://docs.datastax.com/en/developer/ruby-driver/3.1/features/#compression)
