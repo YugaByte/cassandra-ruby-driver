@@ -11,7 +11,7 @@ the Cassandra Query Language version 3 (CQL3) and Cassandra's native protocol.
 
 - Code: https://github.com/yugabyte/cassandra-ruby-driver
 - Docs: http://docs.datastax.com/en/developer/ruby-driver
-- Mailing List: https://groups.google.com/a/lists.datastax.com/forum/#!forum/ruby-driver-user
+- Forum: https://forum.yugabyte.com
 
 This driver is based on [the cql-rb gem](https://github.com/iconara/cql-rb) by [Theo Hultberg](https://github.com/iconara) and we added support for:
 
