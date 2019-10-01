@@ -264,6 +264,15 @@ module Cassandra
         Util.assert_instance_of(::Integer, value, message, &block)
         Util.assert(value <= 127 && value >= -128, message, &block)
       end
+
+      def new_jsonb(value)
+        String(value)
+      end
+
+      def assert_jsonb(value, message, &block)
+        Util.assert_instance_of(::String, value, message, &block)
+      end
+
     end
 
     # @!parse
@@ -1036,6 +1045,38 @@ module Cassandra
     #   end
     const_set('Tinyint', Simple.new(:tinyint))
 
+    # @!parse
+    #   class Jsonb < Type
+    #     # @return [Symbol] `:jsonb`
+    #     # @see Cassandra::Type#kind
+    #     def kind
+    #     end
+    #
+    #     # Coerces the value to String
+    #     # @param value [Object] original value
+    #     # @return [String] value
+    #     # @see Cassandra::Type#new
+    #     def new(value)
+    #     end
+    #
+    #     # Asserts that a given value is a String
+    #     # @param value [Object] value to be validated
+    #     # @param message [String] error message to use when assertion
+    #     #   fails
+    #     # @yieldreturn [String] error message to use when assertion fails
+    #     # @raise [ArgumentError] if the value is not a String
+    #     # @return [void]
+    #     # @see Cassandra::Type#assert
+    #     def assert(value, message = nil, &block)
+    #     end
+    #
+    #     # @return [String] `"jsonb"`
+    #     # @see Cassandra::Type#to_s
+    #     def to_s
+    #     end
+    #   end
+    const_set('Jsonb', Simple.new(:jsonb))
+
     class Tuple < Type
       # @private
       attr_reader :members
@@ -1579,6 +1620,11 @@ module Cassandra
     # @return [Cassandra::Types::Tinyint] tinyint type
     def tinyint
       Tinyint
+    end
+
+    # @return [Cassandra::Types::Jsonb] jsonb type
+    def jsonb
+      Jsonb
     end
 
     # @param value_type [Cassandra::Type] the type of elements in this list
