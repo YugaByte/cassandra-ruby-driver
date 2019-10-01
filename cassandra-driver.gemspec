@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.homepage      = 'https://github.com/YugaByte/cassandra-ruby-driver'
   s.summary       = 'Ruby Driver for YugaByte DB'
   s.description   = 'YugaByte Ruby Driver for YugaByte DB\'s Cassandra compatible YCQL API; derived from Datastax Ruby Driver for Apache Cassandra'
-  s.license       = 'Apache License 2.0'
+  s.license       = 'Apache-2.0'
   s.files         = Dir['lib/**/*.rb', 'README.md', '.yardopts']
   s.require_paths = %w[lib]
 
