@@ -117,6 +117,7 @@ module Cassandra
                                                  type.value_type)
         when :udt              then write_udt_v4(buffer, value, type.fields)
         when :tuple            then write_tuple_v4(buffer, value, type.members)
+        when :jsonb            then write_text(buffer, value)
         else
           raise Errors::EncodingError, %(Unsupported value type: #{type})
         end
@@ -217,6 +218,7 @@ module Cassandra
         when 0x0031 then Types.tuple(
           *::Array.new(buffer.read_short) { read_type_v4(buffer) }
         )
+        when 0x0080 then Types.jsonb
         else
           raise Errors::DecodingError, %(Unsupported column type: #{id})
         end
@@ -255,6 +257,7 @@ module Cassandra
         when :time             then read_time(buffer)
         when :date             then read_date(buffer)
         when :custom           then read_custom(buffer, type, custom_type_handlers)
+        when :jsonb            then read_text(buffer)
         when :list
           return nil unless read_size(buffer)
 
@@ -405,6 +408,7 @@ module Cassandra
                                                  type.value_type)
         when :udt              then write_udt_v3(buffer, value, type.fields)
         when :tuple            then write_tuple_v3(buffer, value, type.members)
+        when :jsonb            then write_text(buffer, value)
         else
           raise Errors::EncodingError, %(Unsupported value type: #{type})
         end
@@ -438,6 +442,7 @@ module Cassandra
         when :text             then read_text(buffer)
         when :varint           then read_varint(buffer)
         when :inet             then read_inet(buffer)
+        when :jsonb            then read_text(buffer)
         when :list
           return nil unless read_size(buffer)
 
@@ -568,6 +573,7 @@ module Cassandra
         when 0x0031 then Types.tuple(
           *::Array.new(buffer.read_short) { read_type_v3(buffer) }
         )
+        when 0x0080 then Types.jsonb
         else
           raise Errors::DecodingError, %(Unsupported column type: #{id})
         end
@@ -628,6 +634,7 @@ module Cassandra
         when :timestamp        then write_timestamp(buffer, value)
         when :timeuuid, :uuid  then write_uuid(buffer, value)
         when :varint           then write_varint(buffer, value)
+        when :jsonb            then write_text(buffer, value)
         when :list, :set       then write_list_v1(buffer, value, type.value_type)
         when :map              then write_map_v1(buffer,
                                                  value,
@@ -666,6 +673,7 @@ module Cassandra
         when :uuid             then read_uuid(buffer)
         when :timeuuid         then read_uuid(buffer, TimeUuid)
         when :inet             then read_inet(buffer)
+        when :jsonb            then read_text(buffer)
         when :list
           return nil unless read_size(buffer)
 
@@ -757,6 +765,7 @@ module Cassandra
         when 0x0020 then Types.list(read_type_v1(buffer))
         when 0x0021 then Types.map(read_type_v1(buffer), read_type_v1(buffer))
         when 0x0022 then Types.set(read_type_v1(buffer))
+        when 0x0080 then Types.text
         else
           raise Errors::DecodingError, %(Unsupported column type: #{kind})
         end
@@ -995,6 +1004,9 @@ module Cassandra
         when :varint
           size = read_short_size(buffer)
           size && buffer.read_varint(size)
+        when :jsonb
+          value = buffer.read_short_bytes
+          value && value.force_encoding(::Encoding::UTF_8)
         else
           raise Errors::EncodingError, %(Unsupported short value type: #{type})
         end
@@ -1068,6 +1080,8 @@ module Cassandra
           end
         when :varint
           buffer.append_short_bytes(value && CqlByteBuffer.new.append_varint(value))
+        when :jsonb
+          buffer.append_short_bytes(value && value.encode(::Encoding::UTF_8))
         else
           raise Errors::EncodingError, %(Unsupported short value type: #{type})
         end
